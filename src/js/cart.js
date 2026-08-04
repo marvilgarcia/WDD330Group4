@@ -17,32 +17,34 @@ function renderCartContents() {
 }
 
 function cartItemTemplate(item) {
-  const newItem = `<li class="cart-card divider">
-  <a href="#" class="cart-card__image">
-    <img
-      src="${item.Image}"
-      alt="${item.Name}"
-    />
-  </a>
-  <a href="#">
-    <h2 class="card__name">${item.Name}</h2>
-  </a>
-  <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: 1</p>
-  <p class="cart-card__price">$${item.FinalPrice}</p>
-</li>`;
+  const quantity = item.Quantity || 1;
+  const lineTotal = item.FinalPrice * quantity;
 
-  return newItem;
+  return `<li class="cart-card divider">
+    <a href="#" class="cart-card__image">
+      <img
+        src="${item.Images.PrimarySmall}"
+        alt="${item.Name}"
+      />
+    </a>
+    <a href="#">
+      <h2 class="card__name">${item.Name}</h2>
+    </a>
+    <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+    <p class="cart-card__quantity">qty: ${quantity}</p>
+    <p class="cart-card__price">$${lineTotal.toFixed(2)}</p>
+  </li>`;
 }
 
 function calculateTotalPrice() {
   const cartItems = getLocalStorage("so-cart") || [];
   const totalPrice = cartItems.reduce((total, item) => {
-    return total + item.FinalPrice;
+    const qty = item.Quantity || 1;
+    return total + item.FinalPrice * qty;
   }, 0);
 
   document.getElementById("total-price").textContent = totalPrice.toFixed(2);
 } 
 
 renderCartContents();
-calculateTotalPrice();  
+calculateTotalPrice();

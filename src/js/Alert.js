@@ -1,5 +1,6 @@
 export default class Alert {
-  constructor({ url = "/json/alerts.json", container = "body" } = {}) {
+  constructor({ id, url = "/json/alerts.json", container = "body" } = {}) {
+    this.id = id;
     this.url = url;
     this.container = container;
   }
@@ -8,26 +9,35 @@ export default class Alert {
     try {
       const res = await fetch(this.url);
       if (!res.ok) throw new Error(`Failed to fetch alerts (${res.status})`);
-      const data = await res.json();
 
+      const data = await res.json();
       if (!Array.isArray(data) || data.length === 0) return null;
+
+      const alert = data.find((item) => item && item.id === this.id);
+      if (!alert) return null;
 
       const section = document.createElement("section");
       section.className = "alert-list";
 
-      data.forEach((item) => {
-        if (!item) return;
-        const p = document.createElement("p");
-        p.textContent = item.message || "";
-        if (item.background) p.style.backgroundColor = item.background;
-        if (item.color) p.style.color = item.color;
-        section.appendChild(p);
-      });
+      const p = document.createElement("p");
+      p.textContent = alert.message || "";
+      if (alert.background) p.style.backgroundColor = alert.background;
+      if (alert.color) p.style.color = alert.color;
 
-      const containerEl = typeof this.container === "string" ? document.querySelector(this.container) : this.container;
+      section.appendChild(p);
+
+      const containerEl =
+        typeof this.container === "string"
+          ? document.querySelector(this.container)
+          : this.container;
+
       (containerEl || document.body).appendChild(section);
+      
+      setTimeout(() => {
+        section.remove();
+      }, 2000);
 
-      return { section, data };
+      return { section, alert };
     } catch (err) {
       console.error(err);
       return null;

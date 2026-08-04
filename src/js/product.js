@@ -9,19 +9,34 @@ const dataSource = new ProductData("tents");
 
 const product = new ProductDetails(productID, dataSource);
 
+
+//animamtion for the add to cart button
+const addToCartButton = document.querySelector("#add-to-cart");
+const quantityIncreaseButton = document.querySelector("#quantity-increase");
+const quantityDecreaseButton = document.querySelector("#quantity-decrease");
+
+addToCartButton.addEventListener("click", () => {
+  addToCartButton.classList.add("animate");
+  setTimeout(() => {
+    addToCartButton.classList.remove("animate");
+  }, 400);
+});
+
+quantityIncreaseButton.addEventListener("click", () => {
+  quantityIncreaseButton.classList.add("animate");
+  setTimeout(() => {
+    quantityIncreaseButton.classList.remove("animate");
+  }, 400);
+});
+
+quantityDecreaseButton.addEventListener("click", () => {
+  quantityDecreaseButton.classList.add("animate");  
+  setTimeout(() => {
+    quantityDecreaseButton.classList.remove("animate");
+  }, 400);
+});
+
+
 // Render the product details
 product.init();
 
-// Add to cart button event handler
-async function addToCartHandler(e) {
-  const selectedProduct = await dataSource.findProductById(
-    e.target.dataset.id
-  );
-
-  addProductToCart(selectedProduct);
-}
-
-// Add listener to Add to Cart button
-document
-  .getElementById("addToCart")
-  .addEventListener("click", addToCartHandler);

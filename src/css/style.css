@@ -105,8 +105,38 @@ p {
   text-shadow: 0 0 0.5em #777;
 }
 
+.add-qty-cart {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+#quantity-input {
+  width: 30px;
+  text-align: center;
+  font-size: larger;
+  color: black;
+}
+
+.quantity-selector {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--secondary-color);
+  color:white
+}
+
+#quantity-decrease,
+#quantity-increase {
+  padding: 0.25em 0.5em;
+  font-size: larger;
+  cursor: pointer;
+}
+
 button {
-  padding: 0.5em 2em;
+  padding: 0.5em 1.5em;
   background-color: var(--secondary-color);
   color: white;
   margin: auto;
@@ -114,6 +144,23 @@ button {
   border: 0;
   font-size: var(--large-font);
   cursor: pointer;
+  
+}
+
+.animate{
+  animation: bounce 0.6s ease;
+}
+
+@keyframes bounce {
+  0%{
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .divider {
@@ -390,3 +437,9 @@ footer {
 
 }
 
+.alert-list {
+  position: fixed;
+  top: 3rem;
+  right: 1rem;
+  z-index: 1000;
+}

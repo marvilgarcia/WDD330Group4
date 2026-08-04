@@ -24,7 +24,14 @@
           <p id="p-color"></p>
           <p id="p-description"></p>
           <p id="p-price"></p>
-          <button id="add-to-cart" data-id="">Add to Cart</button>
+          <div class="add-qty-cart">
+            <div class="quantity-selector">
+              <button id="quantity-decrease" type="button">-</button>
+              <input id="quantity-input" type="number" min="1" value="1" />
+              <button id="quantity-increase" type="button">+</button>
+            </div>
+            <button id="add-to-cart" data-id="">Add to Cart</button>
+          </div>
         </section>
       </section>
     </main>

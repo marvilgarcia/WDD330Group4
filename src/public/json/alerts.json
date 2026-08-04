@@ -1,1 +1,14 @@
-[{"message": "This is only a test", "background": "darkblue", "color": "white"}, {"message": "This is another test", "background": "darkblue", "color": "white"}]
+[
+  {
+    "id": "alert-1",
+    "message": "This is only a test",
+    "background": "darkblue",
+    "color": "white"
+  },
+  {
+    "id": "alert-2",
+    "message": "Your item has been added to the cart!",
+    "background": "olive",
+    "color": "white"
+  }
+]
